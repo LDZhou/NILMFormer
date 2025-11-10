@@ -175,10 +175,10 @@ class SeqToSeqTrainer:
             # =======================verbose======================= #
             if self.verbose:
                 logging.info("Epoch [{}/{}]".format(epoch + 1, n_epochs))
-                logging.info("    Train loss : {:.4f}".format(train_loss))
+                logging.info("    Train loss : {:.6f}".format(train_loss))
 
                 if self.valid_loader is not None:
-                    logging.info("    Valid  loss : {:.4f}".format(valid_loss))
+                    logging.info("    Valid  loss : {:.6f}".format(valid_loss))
 
             # =======================save log======================= #
             if (
@@ -639,10 +639,10 @@ class TserTrainer:
             # =======================verbose======================= #
             if self.verbose:
                 logging.info("Epoch [{}/{}]".format(epoch + 1, n_epochs))
-                logging.info("    Train loss : {:.4f}".format(train_loss))
+                logging.info("    Train loss : {:.6f}".format(train_loss))
 
                 if self.valid_loader is not None:
-                    logging.info("    Valid  loss : {:.4f}".format(valid_loss))
+                    logging.info("    Valid  loss : {:.6f}".format(valid_loss))
 
             # =======================save log======================= #
             if (
