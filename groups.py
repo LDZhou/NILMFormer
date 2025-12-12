@@ -1,4 +1,9 @@
-"""Appliance groups for Pecan Street NILM"""
+"""Appliance groups for Pecan Street NILM
+
+All threshold values are in kW (PecanStreet native unit).
+Keys are standardized to 'min_threshold' and 'max_threshold' for consistency
+with NILMFormer preprocessing code.
+"""
 
 GROUPS = {
     # Flexible high-power loads
@@ -20,7 +25,7 @@ GROUPS = {
     },
     'pool': {
         'cols': ['pool1', 'pool2', 'poolpump1', 'poollight1'],
-        'threshold': {'min_threshold': 0.050, 'max_threshold': 5},
+        'threshold': {'min_threshold': 0.05, 'max_threshold': 5},
         'desc': 'Pool equipment'
     },
     
@@ -51,12 +56,12 @@ GROUPS = {
     # Other
     'pumps': {
         'cols': ['circpump1', 'pump1', 'sewerpump1', 'sumppump1', 'wellpump1'],
-        'threshold': {'min_threshold': 0.050, 'max_threshold': 2.000},
+        'threshold': {'min_threshold': 0.05, 'max_threshold': 2.0},
         'desc': 'Various pumps'
     },
     'other': {
         'cols': ['housefan1', 'jacuzzi1', 'sprinkler1', 'battery1', 'aquarium1', 'security1'],
-        'threshold': {'min_threshold': 0.020, 'max_threshold': 2.000},
+        'threshold': {'min_threshold': 0.02, 'max_threshold': 2.0},
         'desc': 'Misc appliances'
     }
 }

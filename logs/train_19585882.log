@@ -1,0 +1,28 @@
+Training: hvac seed=0
+2025-12-11 19:42:15,806 - INFO - ---- Run experiments with provided parameters ----
+2025-12-11 19:42:15,806 - INFO -       Dataset: PECANSTREET
+2025-12-11 19:42:15,807 - INFO -       Sampling Rate: 1min
+2025-12-11 19:42:15,807 - INFO -       Window Size: 128
+2025-12-11 19:42:15,807 - INFO -       Appliance : hvac
+2025-12-11 19:42:15,807 - INFO -       Model: NILMFormer
+2025-12-11 19:42:15,807 - INFO -       Seed: 0
+2025-12-11 19:42:15,807 - INFO - --------------------------------------------------
+2025-12-11 19:42:15,812 - INFO - Process data ...
+2025-12-11 20:14:52,836 - INFO -              ... Done.
+2025-12-11 20:14:53,892 - INFO - Model training...
+2025-12-11 20:15:56,112 - INFO - Epoch [1/100]
+2025-12-11 20:15:56,112 - INFO -     Train loss : 0.000000
+2025-12-11 20:15:56,112 - INFO -     Valid  loss : 0.000000
+2025-12-11 20:16:43,180 - INFO - Epoch [2/100]
+2025-12-11 20:16:43,181 - INFO -     Train loss : 0.000000
+2025-12-11 20:16:43,181 - INFO -     Valid  loss : 0.000000
+2025-12-11 20:17:30,190 - INFO - Epoch [3/100]
+2025-12-11 20:17:30,192 - INFO -     Train loss : 0.000000
+2025-12-11 20:17:30,192 - INFO -     Valid  loss : 0.000000
+2025-12-11 20:18:17,365 - INFO - Epoch [4/100]
+2025-12-11 20:18:17,367 - INFO -     Train loss : 0.000000
+2025-12-11 20:18:17,367 - INFO -     Valid  loss : 0.000000
+2025-12-11 20:19:04,525 - INFO - Epoch [5/100]
+2025-12-11 20:19:04,526 - INFO -     Train loss : 0.000000
+2025-12-11 20:19:04,526 - INFO -     Valid  loss : 0.000000
+slurmstepd: error: *** JOB 19585882 ON cn-r-2 CANCELLED AT 2025-12-11T20:19:21 ***

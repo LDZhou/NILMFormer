@@ -12,14 +12,14 @@
       "heater3"
     ],
     "threshold": {
-      "min": 0.1,
-      "max": 10
+      "min_threshold": 0.1,
+      "max_threshold": 10.0
     },
+    "desc": "Heating & cooling",
     "houses": [
       661,
       1642,
       2335,
-      2361,
       2818,
       3039,
       3456,
@@ -34,30 +34,20 @@
       7800,
       7901,
       7951,
-      8156,
-      8386,
       8565,
       9019,
-      9160,
       9278,
-      9922
+      8156,
+      8386,
+      2361,
+      9922,
+      9160
     ],
-    "count": 25
-  },
-  "waterheater": {
-    "cols": [
-      "waterheater1",
-      "waterheater2"
-    ],
-    "threshold": {
-      "min": 0.1,
-      "max": 10
-    },
-    "houses": [
-      3039,
-      7951
-    ],
-    "count": 2
+    "stats": {
+      "n_houses": 25,
+      "avg_on_rate": 0.3214379787938552,
+      "avg_power": 2.1839523936236667
+    }
   },
   "ev": {
     "cols": [
@@ -65,9 +55,10 @@
       "car2"
     ],
     "threshold": {
-      "min": 0.2,
-      "max": 15
+      "min_threshold": 0.2,
+      "max_threshold": 15.0
     },
+    "desc": "EV charging",
     "houses": [
       661,
       1642,
@@ -76,21 +67,11 @@
       6139,
       8156
     ],
-    "count": 6
-  },
-  "pool": {
-    "cols": [
-      "pool1",
-      "pool2",
-      "poolpump1",
-      "poollight1"
-    ],
-    "threshold": {
-      "min": 0.05,
-      "max": 5
-    },
-    "houses": [],
-    "count": 0
+    "stats": {
+      "n_houses": 6,
+      "avg_on_rate": 0.08012863128705948,
+      "avg_power": 3.2215630878096655
+    }
   },
   "laundry": {
     "cols": [
@@ -100,69 +81,52 @@
       "clotheswasher_dryg1"
     ],
     "threshold": {
-      "min": 0.02,
-      "max": 8
+      "min_threshold": 0.02,
+      "max_threshold": 8.0
     },
+    "desc": "Washer & dryer",
     "houses": [
-      661,
-      1642,
-      2335,
-      2361,
       2818,
       3039,
-      3456,
-      3538,
-      4031,
       4373,
-      4767,
       6139,
       7719,
       7800,
       7901,
       7951,
-      8156,
-      8386,
       8565,
-      9019,
-      9160,
       9278,
+      8156,
       9922
     ],
-    "count": 23
+    "stats": {
+      "n_houses": 12,
+      "avg_on_rate": 0.1299061126185642,
+      "avg_power": 0.9190306847294778
+    }
   },
   "dishwasher": {
     "cols": [
       "dishwasher1"
     ],
     "threshold": {
-      "min": 0.01,
-      "max": 3
+      "min_threshold": 0.01,
+      "max_threshold": 3.0
     },
+    "desc": "Dishwasher",
     "houses": [
-      661,
-      1642,
-      2335,
-      2361,
-      2818,
       3039,
-      3456,
       4031,
       4373,
-      4767,
       6139,
-      7536,
       7719,
-      7800,
-      7901,
-      7951,
-      8156,
-      8386,
-      8565,
-      9019,
-      9278,
-      9922
+      8156
     ],
-    "count": 22
+    "stats": {
+      "n_houses": 6,
+      "avg_on_rate": 0.22327943061996422,
+      "avg_power": 0.3411778558694047
+    }
   },
   "refrigeration": {
     "cols": [
@@ -173,14 +137,14 @@
       "winecooler1"
     ],
     "threshold": {
-      "min": 0.05,
-      "max": 5
+      "min_threshold": 0.05,
+      "max_threshold": 5.0
     },
+    "desc": "Fridge & freezer",
     "houses": [
       661,
       1642,
       2335,
-      2361,
       2818,
       3039,
       3456,
@@ -194,14 +158,19 @@
       7800,
       7901,
       7951,
-      8156,
-      8386,
       8565,
       9019,
-      9160,
-      9278
+      9278,
+      8156,
+      8386,
+      2361,
+      9160
     ],
-    "count": 23
+    "stats": {
+      "n_houses": 23,
+      "avg_on_rate": 0.6714927868933301,
+      "avg_power": 0.14298611868606761
+    }
   },
   "kitchen": {
     "cols": [
@@ -213,64 +182,24 @@
       "venthood1"
     ],
     "threshold": {
-      "min": 0.02,
-      "max": 8
+      "min_threshold": 0.02,
+      "max_threshold": 8.0
     },
+    "desc": "Cooking appliances",
     "houses": [
-      661,
       1642,
       2335,
-      2361,
-      2818,
-      3039,
-      3456,
       4373,
-      4767,
-      5746,
       6139,
-      7536,
       7719,
       7800,
-      7901,
       7951,
-      8156,
-      8386,
-      8565,
-      9160,
-      9278,
       9922
     ],
-    "count": 22
-  },
-  "pumps": {
-    "cols": [
-      "circpump1",
-      "pump1",
-      "sewerpump1",
-      "sumppump1",
-      "wellpump1"
-    ],
-    "threshold": {
-      "min": 0.05,
-      "max": 2.0
-    },
-    "houses": [],
-    "count": 0
-  },
-  "other": {
-    "cols": [
-      "housefan1",
-      "jacuzzi1",
-      "sprinkler1",
-      "battery1",
-      "aquarium1",
-      "security1"
-    ],
-    "threshold": {
-      "min": 0.02,
-      "max": 2.0
-    },
-    "houses": [],
-    "count": 0
+    "stats": {
+      "n_houses": 8,
+      "avg_on_rate": 0.3894964311220878,
+      "avg_power": 0.1749528366334156
+    }
   }
 }

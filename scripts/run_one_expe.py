@@ -10,6 +10,9 @@ import argparse
 import yaml
 import logging
 import numpy as np
+import hashlib
+import pickle
+from pathlib import Path
 
 from omegaconf import OmegaConf
 
@@ -26,9 +29,35 @@ from src.helpers.expes import launch_models_training
 from src.helpers.preprocessing import PecanStreet_DataBuilder
 
 
+def get_cache_key(dataset, app, sampling_rate, window_size, house_list):
+    """Generate a unique cache key based on data parameters"""
+    key_str = f"{dataset}_{app}_{sampling_rate}_{window_size}_{sorted(house_list)}"
+    return hashlib.md5(key_str.encode()).hexdigest()[:12]
+
+
+def load_cached_data(cache_path):
+    """Load cached data if exists"""
+    if cache_path.exists():
+        logging.info(f"Loading cached data from {cache_path}")
+        with open(cache_path, 'rb') as f:
+            return pickle.load(f)
+    return None
+
+
+def save_cached_data(cache_path, data_dict):
+    """Save processed data to cache"""
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(cache_path, 'wb') as f:
+        pickle.dump(data_dict, f)
+    logging.info(f"Cached data saved to {cache_path}")
+
+
 def launch_one_experiment(expes_config: OmegaConf):
     np.random.seed(seed=expes_config.seed)
 
+    # Setup cache
+    cache_dir = Path(expes_config.data_path) / "cache"
+    
     logging.info("Process data ...")
     if expes_config.dataset == "UKDALE":
         data_builder = UKDALE_DataBuilder(
@@ -87,14 +116,40 @@ def launch_one_experiment(expes_config: OmegaConf):
         )
 
     elif expes_config.dataset == "PECANSTREET":
-        data_builder = PecanStreet_DataBuilder(
-            data_path=f"{expes_config.data_path}/pecanstreet/",
-            mask_app=expes_config.app,
-            sampling_rate=expes_config.sampling_rate,
-            window_size=expes_config.window_size,
+        # Generate cache key
+        cache_key = get_cache_key(
+            expes_config.dataset,
+            expes_config.app,
+            expes_config.sampling_rate,
+            expes_config.window_size,
+            expes_config.house_with_app_i
         )
+        cache_path = cache_dir / f"{cache_key}.pkl"
+        
+        # Try to load from cache
+        cached = load_cached_data(cache_path)
+        
+        if cached is not None:
+            data = cached['data']
+            st_date = cached['st_date']
+            data_builder = PecanStreet_DataBuilder(
+                data_path=f"{expes_config.data_path}/pecanstreet/",
+                mask_app=expes_config.app,
+                sampling_rate=expes_config.sampling_rate,
+                window_size=expes_config.window_size,
+            )
+        else:
+            data_builder = PecanStreet_DataBuilder(
+                data_path=f"{expes_config.data_path}/pecanstreet/",
+                mask_app=expes_config.app,
+                sampling_rate=expes_config.sampling_rate,
+                window_size=expes_config.window_size,
+            )
 
-        data, st_date = data_builder.get_nilm_dataset(house_indicies=expes_config.house_with_app_i)
+            data, st_date = data_builder.get_nilm_dataset(house_indicies=expes_config.house_with_app_i)
+            
+            # Save to cache
+            save_cached_data(cache_path, {'data': data, 'st_date': st_date})
 
         if isinstance(expes_config.window_size, str):
             expes_config.window_size = data_builder.window_size
@@ -197,7 +252,7 @@ def main(dataset, sampling_rate, window_size, appliance, name_model, seed):
             datasets_config = datasets_config[dataset]
         else:
             raise ValueError(
-                "Dataset {} unknown. Only 'UKDALE' and 'REFIT' available.".format(
+                "Dataset {} unknown. Only 'UKDALE', 'REFIT' and 'PECANSTREET' available.".format(
                     dataset
                 )
             )

@@ -1183,13 +1183,24 @@ class PecanStreet_DataBuilder(object):
         self.window_size = window_size
         self.window_stride = window_stride if window_stride else window_size
         self.soft_label = soft_label
-        self.cutoff = 10000
+        self.cutoff = 10  # 10 kW (PecanStreet data is in kW)
         
         # Load group metadata
         with open(f"{data_path}pecan_processed/groups_meta.json") as f:
             meta = json.load(f)
         self.meta = meta
-        self.appliance_param = {app: meta[app]['threshold'] for app in self.mask_app if app in meta}
+        
+        # Normalize threshold keys to min_threshold/max_threshold (FIXED)
+        self.appliance_param = {}
+        for app in self.mask_app:
+            if app in meta:
+                th = meta[app]['threshold']
+                # Handle both 'min'/'max' and 'min_threshold'/'max_threshold' keys
+                self.appliance_param[app] = {
+                    'min_threshold': th.get('min_threshold', th.get('min', 0.02)),
+                    'max_threshold': th.get('max_threshold', th.get('max', 10.0))
+                }
+        
         self.mask_app = ["grid"] + self.mask_app
 
     def get_nilm_dataset(self, house_indicies):
@@ -1250,8 +1261,8 @@ class PecanStreet_DataBuilder(object):
             
             house[app] = house[app].clip(lower=0, upper=self.cutoff)
             
-            # Create status
-            th = self.appliance_param.get(app, {'min': 0.02, 'max': 10.0})
+            # Create status using normalized threshold keys (FIXED)
+            th = self.appliance_param.get(app, {'min_threshold': 0.02, 'max_threshold': 10.0})
             status = ((house[app] >= th['min_threshold']) & (house[app] <= th['max_threshold']))
             house[f"{app}_status"] = status.astype(int if not self.soft_label else float)
 
@@ -1268,6 +1279,3 @@ class PecanStreet_DataBuilder(object):
 
     def _check_anynan(self, a):
         return np.isnan(np.sum(a))
-
-
-

@@ -1,0 +1,10 @@
+Training: hvac seed=0
+2025-12-11 21:18:07,191 - INFO - ---- Run experiments with provided parameters ----
+2025-12-11 21:18:07,192 - INFO -       Dataset: PECANSTREET
+2025-12-11 21:18:07,192 - INFO -       Sampling Rate: 1min
+2025-12-11 21:18:07,192 - INFO -       Window Size: 128
+2025-12-11 21:18:07,192 - INFO -       Appliance : hvac
+2025-12-11 21:18:07,192 - INFO -       Model: NILMFormer
+2025-12-11 21:18:07,192 - INFO -       Seed: 0
+2025-12-11 21:18:07,192 - INFO - --------------------------------------------------
+2025-12-11 21:18:07,196 - INFO - Process data ...
