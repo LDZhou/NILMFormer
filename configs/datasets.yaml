@@ -1,40 +1,268 @@
+PECANSTREET:
+  dishwasher:
+    app: dishwasher
+    house_with_app_i:
+    - 661
+    - 7800
+    - 4373
+    - 1642
+    - 7951
+    - 3039
+    - 9278
+    - 7536
+    - 2361
+    - 2818
+    - 8386
+    - 7719
+    - 8565
+    - 8156
+    - 2335
+    - 4767
+    - 9922
+    - 4031
+    - 6139
+    - 7901
+    - 9019
+    - 3456
+  ev:
+    app: ev
+    house_with_app_i:
+    - 661
+    - 1642
+    - 8156
+    - 4373
+    - 6139
+    - 4767
+  hvac:
+    app: hvac
+    house_with_app_i:
+    - 4031
+    - 7901
+    - 661
+    - 9278
+    - 5746
+    - 4373
+    - 7536
+    - 1642
+    - 9160
+    - 3039
+    - 2335
+    - 6139
+    - 7800
+    - 2361
+    - 2818
+    - 8565
+    - 7951
+    - 9019
+    - 8156
+    - 9922
+    - 3538
+    - 4767
+    - 7719
+    - 8386
+    - 3456
+  kitchen:
+    app: kitchen
+    house_with_app_i:
+    - 661
+    - 7800
+    - 4767
+    - 1642
+    - 7951
+    - 3039
+    - 9278
+    - 7536
+    - 2361
+    - 2818
+    - 8386
+    - 7719
+    - 8565
+    - 8156
+    - 2335
+    - 5746
+    - 9922
+    - 4373
+    - 6139
+    - 7901
+    - 9160
+    - 3456
+  laundry:
+    app: laundry
+    house_with_app_i:
+    - 7951
+    - 4373
+    - 661
+    - 4031
+    - 8386
+    - 7719
+    - 1642
+    - 7800
+    - 3039
+    - 2335
+    - 6139
+    - 9160
+    - 2361
+    - 2818
+    - 8565
+    - 8156
+    - 9278
+    - 9922
+    - 3538
+    - 4767
+    - 7901
+    - 9019
+    - 3456
+  refrigeration:
+    app: refrigeration
+    house_with_app_i:
+    - 7901
+    - 4373
+    - 661
+    - 4031
+    - 8156
+    - 7536
+    - 1642
+    - 7719
+    - 3039
+    - 2335
+    - 5746
+    - 9019
+    - 2361
+    - 2818
+    - 8386
+    - 7951
+    - 9160
+    - 9278
+    - 3538
+    - 4767
+    - 7800
+    - 8565
+    - 3456
+  waterheater:
+    app: waterheater
+    house_with_app_i:
+    - 7951
+    - 3039
 REFIT:
   Dishwasher:
-    app: !!str Dishwasher
-    house_with_app_i: [1, 2, 3, 5, 6, 7, 9, 10, 13, 15, 16, 18, 20]
-  WashingMachine:
-    app: !!str  WashingMachine
-    house_with_app_i: [1, 2, 3, 5, 6, 7, 8, 9, 10, 13, 15, 16, 17, 18, 19]
+    app: Dishwasher
+    house_with_app_i:
+    - 1
+    - 2
+    - 3
+    - 5
+    - 6
+    - 7
+    - 9
+    - 10
+    - 13
+    - 15
+    - 16
+    - 18
+    - 20
   Kettle:
-    app: !!str Kettle
-    house_with_app_i: [2, 3, 4, 5, 6, 7, 9, 12, 13, 15, 19, 20]
+    app: Kettle
+    house_with_app_i:
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 9
+    - 12
+    - 13
+    - 15
+    - 19
+    - 20
   Microwave:
-    app: !!str Microwave
-    house_with_app_i: [2, 3, 4, 6, 8, 9, 10, 12, 13, 15, 17, 18, 19, 20]
-
+    app: Microwave
+    house_with_app_i:
+    - 2
+    - 3
+    - 4
+    - 6
+    - 8
+    - 9
+    - 10
+    - 12
+    - 13
+    - 15
+    - 17
+    - 18
+    - 19
+    - 20
+  WashingMachine:
+    app: WashingMachine
+    house_with_app_i:
+    - 1
+    - 2
+    - 3
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+    - 13
+    - 15
+    - 16
+    - 17
+    - 18
+    - 19
 UKDALE:
-  WashingMachine:
-    app: !!str washing_machine
-    ind_house_train: [1, 3, 4, 5]
-    ind_house_valid: [5]
-    ind_house_test: [2]
   Dishwasher:
-    app: !!str dishwasher
-    ind_house_train: [1, 3, 4, 5]
-    ind_house_valid: [1]
-    ind_house_test: [2]
-  Kettle:
-    app: !!str kettle
-    ind_house_train: [1, 3, 4, 5]
-    ind_house_valid: [1]
-    ind_house_test: [2]
-  Microwave:
-    app: !!str microwave
-    ind_house_train: [1, 3, 4, 5]
-    ind_house_valid: [1]
-    ind_house_test: [2]
+    app: dishwasher
+    ind_house_test:
+    - 2
+    ind_house_train:
+    - 1
+    - 3
+    - 4
+    - 5
+    ind_house_valid:
+    - 1
   Fridge:
-    app: !!str fridge
-    ind_house_train: [1, 3, 4, 5]
-    ind_house_valid: [1]
-    ind_house_test: [2]
+    app: fridge
+    ind_house_test:
+    - 2
+    ind_house_train:
+    - 1
+    - 3
+    - 4
+    - 5
+    ind_house_valid:
+    - 1
+  Kettle:
+    app: kettle
+    ind_house_test:
+    - 2
+    ind_house_train:
+    - 1
+    - 3
+    - 4
+    - 5
+    ind_house_valid:
+    - 1
+  Microwave:
+    app: microwave
+    ind_house_test:
+    - 2
+    ind_house_train:
+    - 1
+    - 3
+    - 4
+    - 5
+    ind_house_valid:
+    - 1
+  WashingMachine:
+    app: washing_machine
+    ind_house_test:
+    - 2
+    ind_house_train:
+    - 1
+    - 3
+    - 4
+    - 5
+    ind_house_valid:
+    - 5

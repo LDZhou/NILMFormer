@@ -1,0 +1,34 @@
+Training: hvac seed=0
+2025-12-11 19:04:06,306 - INFO - ---- Run experiments with provided parameters ----
+2025-12-11 19:04:06,307 - INFO -       Dataset: PECANSTREET
+2025-12-11 19:04:06,307 - INFO -       Sampling Rate: 1min
+2025-12-11 19:04:06,307 - INFO -       Window Size: 128
+2025-12-11 19:04:06,307 - INFO -       Appliance : hvac
+2025-12-11 19:04:06,307 - INFO -       Model: NILMFormer
+2025-12-11 19:04:06,307 - INFO -       Seed: 0
+2025-12-11 19:04:06,307 - INFO - --------------------------------------------------
+2025-12-11 19:04:06,314 - INFO - Process data ...
+2025-12-11 19:36:17,950 - INFO -              ... Done.
+Traceback (most recent call last):
+  File "/nfs/stak/users/zhouling/ENTER/envs/ai_env/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/nfs/stak/users/zhouling/ENTER/envs/ai_env/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/nfs/hpc/share/zhouling/research/NILMFormer/scripts/run_one_expe.py", line 295, in <module>
+    main(
+  File "/nfs/hpc/share/zhouling/research/NILMFormer/scripts/run_one_expe.py", line 261, in main
+    launch_one_experiment(expes_config)
+  File "/nfs/hpc/share/zhouling/research/NILMFormer/scripts/run_one_expe.py", line 124, in launch_one_experiment
+    expes_config.threshold = data_builder.appliance_param[expes_config.app][
+KeyError: 'min_threshold'
+Training: hvac seed=1
+2025-12-11 19:36:45,418 - INFO - ---- Run experiments with provided parameters ----
+2025-12-11 19:36:45,418 - INFO -       Dataset: PECANSTREET
+2025-12-11 19:36:45,418 - INFO -       Sampling Rate: 1min
+2025-12-11 19:36:45,418 - INFO -       Window Size: 128
+2025-12-11 19:36:45,418 - INFO -       Appliance : hvac
+2025-12-11 19:36:45,418 - INFO -       Model: NILMFormer
+2025-12-11 19:36:45,418 - INFO -       Seed: 1
+2025-12-11 19:36:45,418 - INFO - --------------------------------------------------
+2025-12-11 19:36:45,434 - INFO - Process data ...
+slurmstepd: error: *** JOB 19585827 ON cn-r-2 CANCELLED AT 2025-12-11T19:38:05 ***

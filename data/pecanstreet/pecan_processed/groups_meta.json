@@ -1,0 +1,276 @@
+{
+  "hvac": {
+    "cols": [
+      "air1",
+      "air2",
+      "air3",
+      "furnace1",
+      "furnace2",
+      "airwindowunit1",
+      "heater1",
+      "heater2",
+      "heater3"
+    ],
+    "threshold": {
+      "min": 0.1,
+      "max": 10
+    },
+    "houses": [
+      661,
+      1642,
+      2335,
+      2361,
+      2818,
+      3039,
+      3456,
+      3538,
+      4031,
+      4373,
+      4767,
+      5746,
+      6139,
+      7536,
+      7719,
+      7800,
+      7901,
+      7951,
+      8156,
+      8386,
+      8565,
+      9019,
+      9160,
+      9278,
+      9922
+    ],
+    "count": 25
+  },
+  "waterheater": {
+    "cols": [
+      "waterheater1",
+      "waterheater2"
+    ],
+    "threshold": {
+      "min": 0.1,
+      "max": 10
+    },
+    "houses": [
+      3039,
+      7951
+    ],
+    "count": 2
+  },
+  "ev": {
+    "cols": [
+      "car1",
+      "car2"
+    ],
+    "threshold": {
+      "min": 0.2,
+      "max": 15
+    },
+    "houses": [
+      661,
+      1642,
+      4373,
+      4767,
+      6139,
+      8156
+    ],
+    "count": 6
+  },
+  "pool": {
+    "cols": [
+      "pool1",
+      "pool2",
+      "poolpump1",
+      "poollight1"
+    ],
+    "threshold": {
+      "min": 0.05,
+      "max": 5
+    },
+    "houses": [],
+    "count": 0
+  },
+  "laundry": {
+    "cols": [
+      "clotheswasher1",
+      "drye1",
+      "dryg1",
+      "clotheswasher_dryg1"
+    ],
+    "threshold": {
+      "min": 0.02,
+      "max": 8
+    },
+    "houses": [
+      661,
+      1642,
+      2335,
+      2361,
+      2818,
+      3039,
+      3456,
+      3538,
+      4031,
+      4373,
+      4767,
+      6139,
+      7719,
+      7800,
+      7901,
+      7951,
+      8156,
+      8386,
+      8565,
+      9019,
+      9160,
+      9278,
+      9922
+    ],
+    "count": 23
+  },
+  "dishwasher": {
+    "cols": [
+      "dishwasher1"
+    ],
+    "threshold": {
+      "min": 0.01,
+      "max": 3
+    },
+    "houses": [
+      661,
+      1642,
+      2335,
+      2361,
+      2818,
+      3039,
+      3456,
+      4031,
+      4373,
+      4767,
+      6139,
+      7536,
+      7719,
+      7800,
+      7901,
+      7951,
+      8156,
+      8386,
+      8565,
+      9019,
+      9278,
+      9922
+    ],
+    "count": 22
+  },
+  "refrigeration": {
+    "cols": [
+      "refrigerator1",
+      "refrigerator2",
+      "freezer1",
+      "icemaker1",
+      "winecooler1"
+    ],
+    "threshold": {
+      "min": 0.05,
+      "max": 5
+    },
+    "houses": [
+      661,
+      1642,
+      2335,
+      2361,
+      2818,
+      3039,
+      3456,
+      3538,
+      4031,
+      4373,
+      4767,
+      5746,
+      7536,
+      7719,
+      7800,
+      7901,
+      7951,
+      8156,
+      8386,
+      8565,
+      9019,
+      9160,
+      9278
+    ],
+    "count": 23
+  },
+  "kitchen": {
+    "cols": [
+      "oven1",
+      "oven2",
+      "range1",
+      "microwave1",
+      "disposal1",
+      "venthood1"
+    ],
+    "threshold": {
+      "min": 0.02,
+      "max": 8
+    },
+    "houses": [
+      661,
+      1642,
+      2335,
+      2361,
+      2818,
+      3039,
+      3456,
+      4373,
+      4767,
+      5746,
+      6139,
+      7536,
+      7719,
+      7800,
+      7901,
+      7951,
+      8156,
+      8386,
+      8565,
+      9160,
+      9278,
+      9922
+    ],
+    "count": 22
+  },
+  "pumps": {
+    "cols": [
+      "circpump1",
+      "pump1",
+      "sewerpump1",
+      "sumppump1",
+      "wellpump1"
+    ],
+    "threshold": {
+      "min": 0.05,
+      "max": 2.0
+    },
+    "houses": [],
+    "count": 0
+  },
+  "other": {
+    "cols": [
+      "housefan1",
+      "jacuzzi1",
+      "sprinkler1",
+      "battery1",
+      "aquarium1",
+      "security1"
+    ],
+    "threshold": {
+      "min": 0.02,
+      "max": 2.0
+    },
+    "houses": [],
+    "count": 0
+  }
+}

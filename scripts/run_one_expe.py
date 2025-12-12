@@ -23,6 +23,7 @@ from src.helpers.preprocessing import (
 )
 from src.helpers.dataset import NILMscaler
 from src.helpers.expes import launch_models_training
+from src.helpers.preprocessing import PecanStreet_DataBuilder
 
 
 def launch_one_experiment(expes_config: OmegaConf):
@@ -82,6 +83,32 @@ def launch_one_experiment(expes_config: OmegaConf):
         data_train, st_date_train, data_valid, st_date_valid = (
             split_train_test_pdl_nilmdataset(
                 data_train, st_date_train, nb_house_test=1, seed=expes_config.seed
+            )
+        )
+
+    elif expes_config.dataset == "PECANSTREET":
+        data_builder = PecanStreet_DataBuilder(
+            data_path=f"{expes_config.data_path}/pecanstreet/",
+            mask_app=expes_config.app,
+            sampling_rate=expes_config.sampling_rate,
+            window_size=expes_config.window_size,
+        )
+
+        data, st_date = data_builder.get_nilm_dataset(house_indicies=expes_config.house_with_app_i)
+
+        if isinstance(expes_config.window_size, str):
+            expes_config.window_size = data_builder.window_size
+
+        # Split: 16 train, 2 valid, 2 test
+        data_train, st_date_train, data_test, st_date_test = (
+            split_train_test_pdl_nilmdataset(
+                data.copy(), st_date.copy(), nb_house_test=2, seed=expes_config.seed
+            )
+        )
+
+        data_train, st_date_train, data_valid, st_date_valid = (
+            split_train_test_pdl_nilmdataset(
+                data_train, st_date_train, nb_house_test=2, seed=expes_config.seed
             )
         )
 

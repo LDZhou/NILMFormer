@@ -7,6 +7,7 @@
 #################################################################################################################
 
 import os
+import json
 import numpy as np
 import pandas as pd
 
@@ -1172,3 +1173,101 @@ class REFIT_DataBuilder(object):
         Fast check of NaN in a numpy array.
         """
         return np.isnan(np.sum(a))
+
+
+class PecanStreet_DataBuilder(object):
+    def __init__(self, data_path, mask_app, sampling_rate, window_size, window_stride=None, soft_label=False):
+        self.data_path = data_path
+        self.mask_app = mask_app if isinstance(mask_app, list) else [mask_app]
+        self.sampling_rate = sampling_rate
+        self.window_size = window_size
+        self.window_stride = window_stride if window_stride else window_size
+        self.soft_label = soft_label
+        self.cutoff = 10000
+        
+        # Load group metadata
+        with open(f"{data_path}pecan_processed/groups_meta.json") as f:
+            meta = json.load(f)
+        self.meta = meta
+        self.appliance_param = {app: meta[app]['threshold'] for app in self.mask_app if app in meta}
+        self.mask_app = ["grid"] + self.mask_app
+
+    def get_nilm_dataset(self, house_indicies):
+        output_data, st_date = np.array([]), pd.DataFrame()
+
+        for indice in house_indicies:
+            tmp_list_st_date = []
+            data = self._get_dataframe(indice)
+            stems, st_date_stems = self._get_stems(data)
+            n_wins = len(data) // self.window_stride if self.window_size == self.window_stride else 1 + ((len(data) - self.window_size) // self.window_stride)
+            X = np.empty((len(house_indicies) * n_wins, len(self.mask_app), 2, self.window_size))
+
+            cpt = 0
+            for i in range(n_wins):
+                tmp = stems[:, i * self.window_stride : i * self.window_stride + self.window_size]
+                if not self._check_anynan(tmp):
+                    if tmp[2::2, :].sum() == 0:  # Skip all-OFF windows
+                        continue
+                    tmp_list_st_date.append(st_date_stems[i * self.window_stride])
+                    X[cpt, 0, 0, :] = tmp[0, :]
+                    X[cpt, 0, 1, :] = (tmp[0, :] > 0).astype(int)
+                    key = 1
+                    for j in range(1, len(self.mask_app)):
+                        X[cpt, j, 0, :], X[cpt, j, 1, :] = tmp[key, :], tmp[key + 1, :]
+                        key += 2
+                    cpt += 1
+
+            tmp_st_date = pd.DataFrame(tmp_list_st_date, index=[indice] * cpt, columns=["start_date"])
+            output_data = np.concatenate((output_data, X[:cpt, :, :, :]), axis=0) if output_data.size else X[:cpt, :, :, :]
+            st_date = pd.concat([st_date, tmp_st_date], axis=0) if st_date.size else tmp_st_date
+
+        return output_data, st_date
+
+    def _get_dataframe(self, indice):
+        df = pd.read_csv(f"{self.data_path}1minute_data_austin.csv")
+        df['localminute'] = pd.to_datetime(df['localminute'], utc=True)
+        house = df[df['dataid'] == indice].set_index('localminute').sort_index().resample('1min').mean().ffill(limit=5)
+        
+        # Add solar to grid
+        if 'solar' in house.columns:
+            solar = house['solar'].fillna(0).abs()
+            if 'solar2' in house.columns:
+                solar += house['solar2'].fillna(0).abs()
+            house['grid'] += solar
+        house['grid'] = house['grid'].clip(lower=0)
+        house.loc[house['grid'] < 0.005, 'grid'] = 0
+        house['grid'] = house['grid'].clip(upper=self.cutoff)
+
+        # Process each group
+        for app in self.mask_app[1:]:
+            if app in self.meta:
+                # Sum all columns in group
+                cols = [c for c in self.meta[app]['cols'] if c in house.columns]
+                house[app] = house[cols].sum(axis=1, min_count=1).fillna(0) if cols else 0
+            else:
+                # Single column
+                house[app] = house[app].fillna(0) if app in house.columns else 0
+            
+            house[app] = house[app].clip(lower=0, upper=self.cutoff)
+            
+            # Create status
+            th = self.appliance_param.get(app, {'min': 0.02, 'max': 10.0})
+            status = ((house[app] >= th['min_threshold']) & (house[app] <= th['max_threshold']))
+            house[f"{app}_status"] = status.astype(int if not self.soft_label else float)
+
+        return house
+
+    def _get_stems(self, dataframe):
+        stems = np.empty((1 + (len(self.mask_app) - 1) * 2, dataframe.shape[0]))
+        stems[0, :] = dataframe["grid"].values
+        key = 1
+        for appliance in self.mask_app[1:]:
+            stems[key, :], stems[key + 1, :] = dataframe[appliance].values, dataframe[f"{appliance}_status"].values
+            key += 2
+        return stems, list(dataframe.index)
+
+    def _check_anynan(self, a):
+        return np.isnan(np.sum(a))
+
+
+
