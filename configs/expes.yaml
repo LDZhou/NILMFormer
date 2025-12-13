@@ -12,8 +12,8 @@ list_exo_variables:
 power_scaling_type: !!str MaxScaling
 appliance_scaling_type: !!str SameAsPower
 batch_size: !!int 256
-epochs: !!int 100
-p_es: !!int 10
+epochs: !!int 500
+p_es: !!int 20
 p_rlr: !!int 3
 n_warmup_epochs: !!int 0
 device: !!str cuda
